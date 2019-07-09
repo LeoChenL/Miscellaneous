@@ -1,0 +1,2 @@
+# SevenEight
+Some exercises
