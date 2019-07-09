@@ -1,5 +1,5 @@
-#ifndef MYUNIQUEPOINTER_H
-#define MYUNIQUEPOINTER_H
+#INNDEF MYUNIQUEPOINTER_H
+#DEFINE MYUNIQUEPOINTER_H
 /*
 Practice
 To achieve my unique poiter class with template
@@ -105,4 +105,4 @@ public:
 
 
 
-#endif // end MYUNIQUEPOINTER_H
+#ENDIF // END MYUNIQUEPOINTER_H
