@@ -1,5 +1,5 @@
-#INNDEF MYUNIQUEPOINTER_H
-#DEFINE MYUNIQUEPOINTER_H
+#ifndef MYUNIQUEPOINTER_H
+#define MYUNIQUEPOINTER_H
 /*
 Practice
 To achieve my unique poiter class with template
@@ -11,12 +11,7 @@ private:
   T* ptr_;
 public:
   // ctor
-  // MyUniquePointer():ptr_(nullptr){}
   MyUniquePointer(T* obj_ptr=nullptr):ptr_(obj_ptr){}
-
-  MyUniquePointer(const T& obj){
-    ptr_ = &obj;
-  }
 
   // Delete copy ctor and assignment
   MyUniquePointer(const MyUniquePointer<T>& ptr) = delete; // Do not allow two pointer pointing to the same object
@@ -25,11 +20,11 @@ public:
   // Move ctor and assignment
   MyUniquePointer(MyUniquePointer<T>&& ptr){
     reset(ptr.release());
-    std::cout<<"Move ctor"<<std::endl;
+    // std::cout<<"Move ctor"<<std::endl;
   }
   MyUniquePointer& operator=(MyUniquePointer<T>&& ptr){
     reset(ptr.release());
-    std::cout<<"Move assignment"<<std::endl;
+    // std::cout<<"Move Assignment"<<std::endl;
     return *this;
   }
 
@@ -105,4 +100,4 @@ public:
 
 
 
-#ENDIF // END MYUNIQUEPOINTER_H
+#endif // END MYUNIQUEPOINTER_H
