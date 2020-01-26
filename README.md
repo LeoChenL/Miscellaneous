@@ -2,8 +2,8 @@
 Sone Exercises
 
 ## Content
-*MyUniquePointer
-*Intersection of Line Segements
+* MyUniquePointer
+* Intersection of Line Segements
 
 
 **MyUniquePointer**
