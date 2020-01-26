@@ -1,10 +1,12 @@
 # Miscellaneous
-Exercises
+Sone Exercises
 
-MyUniquePointer
+## Content
+*MyUniquePointer
+*Intersection of Line Segements
+
+
+**MyUniquePointer**
 Create a class that achieves the same functions as std::unique_ptr
 
-
-
-Interview Questions
-Intersection of line segments
+**Intersection of Line Segments**
