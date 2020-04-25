@@ -10,9 +10,11 @@ struct Node{
 };
 
 class DoubleLinkList {
-public:
+private:
   Node* head;
   int count;
+
+public:
   DoubleLinkList() {
     head = NULL;
     count = 0;
