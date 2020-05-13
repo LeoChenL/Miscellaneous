@@ -29,7 +29,7 @@ class ArrayStack:
         return self.n_element
 
     def is_empty(self):
-        if self.top < 0:
+        if self.n_element == 0:
             return True
         else:
             return False
