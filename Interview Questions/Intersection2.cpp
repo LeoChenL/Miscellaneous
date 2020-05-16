@@ -1,6 +1,14 @@
 /*
+Given two line segments, determine if there are any intersections
+
 Solution 2
 vector straddle
+
+	线段互相跨立即相交
+	https://zhuanlan.zhihu.com/p/37360022
+
+	向量叉积
+	https://blog.csdn.net/itismelzp/article/details/49451197
 */
 
 #include <iostream>
