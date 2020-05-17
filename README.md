@@ -1,12 +1,7 @@
 # Miscellaneous
-Sone Exercises
+Some programming exercises
 
-## Content
-* MyUniquePointer
-* Intersection of Line Segements
+## Getting Started
 
-
-**MyUniquePointer**
-Create a class that achieves the same functions as std::unique_ptr
-
-**Intersection of Line Segments**
+### Installing
+Clone the repo
