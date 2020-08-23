@@ -1,6 +1,6 @@
 /*
 The above algorithm has a time and space complexity of O(n^2) because we will
-not have more than n*nn∗n subproblems.
+not have more than n*n subproblems.
 */
 
 using namespace std;

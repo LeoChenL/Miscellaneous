@@ -1,75 +1,133 @@
+/*
+Practice
+To achieve my shared poiter class with template
+*/
+
 #include <iostream>
-##include "MySharePointer.h"
+using namespace std;
+
+
+template<typename T>
+class MySharePtr{
+private:
+  T *_ptr;
+  int *_count;
+
+public:
+  // Constructor
+  MySharePtr(T *ptr=nullptr); // MySharePtr<int> sp(new int(2))
+  MySharePtr(const MySharePtr<T> &sp); // MySharePtr<int> sp2(sp1)
+  MySharePtr<T>& operator=(const MySharePtr<T> &rhs); // sp2 = sp1
+  // Deconstructor
+  ~MySharePtr();
+
+  T operator*();
+  T* operator->();
+  T* operator+(int i);
+  bool operator==(const MySharePtr &sp);
+  bool operator!=(const MySharePtr &sp);
+  int getcount();
+};
 
 // Constructor
 template<typename T>
-MySharePointer<T>::MySharePointer(T *p) {
-  ptr = p;
+MySharePtr<T>::MySharePtr(T *ptr) {
+  // default param not in decleration
+  _ptr = ptr;
   try{
-    use_count = new int(1);
+    _count = new int(1);
   }
   catch (...) {
-    ptr = nullptr;
-    delete use_count;
-    use_count = nullptr;
+    _ptr = nullptr;
+    delete _count;
+    _count = nullptr;
   }
 }
 
 template<typename T>
-MySharePointer<T>::MySharePointer(const MySharePointer<T> &sp) {
-  this->ptr = sp.ptr;
-  use_count = sp.use_count;
-  ++(*use_count);
+MySharePtr<T>::MySharePtr(const MySharePtr<T> &sp) {
+  this->_ptr = sp._ptr;
+  _count = sp._count;
+  if ( _ptr!=nullptr ) {
+    ++(*_count);
+  }
 }
 
 template<typename T>
-MySharePointer<T>::MySharePointer<T>& operator=(const MySharePointer<T> &rhs) {
-  ++(*rhs.use_count);
-  --(*use_count);
-  if ( use_count == 0 ) {
-    delete ptr;
-    ptr = nullptr;
-    delete use_count;
-    use_count = nullptr;
+MySharePtr<T>& MySharePtr<T>::operator=(const MySharePtr<T> &rhs) {
+  if ( this!=&rhs ) {
+    // avoid assigning itself
+    ++(*rhs._count);
+    --(*_count);
+    if ( _count == 0 ) {
+      delete _ptr;
+      delete _count;
+      _ptr = nullptr;
+      _count = nullptr;
+    }
+    _ptr = rhs._ptr;
+    _count = rhs._count;
   }
-  ptr = rhs.ptr;
-  *use_count = *(rhs.use_count);
+
   return *this;
 }
 
-// Deconstructor
+// Destructor
 template<typename T>
-MySharePointer<T>::~MySharePointer() {
-  getcount();
-  delete ptr;
-  ptr = nullptr;
-  delete use_count;
-  use_count = nullptr;
+MySharePtr<T>::~MySharePtr() {
+  cout<<"MySharePtr Destructor"<<endl;
+  --(*_count);
+  cout<<"use count:"<<*_count<<endl;
+  if ( *_count == 0 ) {
+    cout<<"Delete ptr and count"<<endl;
+    delete _ptr;
+    delete _count;
+    _ptr = nullptr;
+    _count = nullptr;
+  }
 }
 
 // Member function
 template<typename T>
-T MySharePointer<T>::operator*() {
-  return *ptr;
+T MySharePtr<T>::operator*() {
+  return *_ptr;
 }
 
 template<typename T>
-T* MySharePointer<T>::operator->() {
-  return ptr;
+T* MySharePtr<T>::operator->() {
+  return _ptr;
 }
 
 template<typename T>
-T* MySharePointer<T>::operator+(int i) {
-  T *tmp = ptr + i;
+T* MySharePtr<T>::operator+(int i) {
+  T *tmp = _ptr + i;
   return tmp;
 }
 
 template<typename T>
-int MySharePointer<T>::operator-(MySharePointer<T> &sp1, MySharePointer<T> &sp2) {
-  return sp1.ptr - sp2.ptr;
+int MySharePtr<T>::getcount() {
+  return *_count;
 }
 
 template<typename T>
-int MySharePointer::getcount() {
-  return *use_count;
+bool MySharePtr<T>::operator==(const MySharePtr &sp) {
+  return _ptr==sp._ptr;
+}
+
+template<typename T>
+bool MySharePtr<T>::operator!=(const MySharePtr &sp) {
+  return _ptr!=sp._ptr;
+}
+
+
+int main(int argc, char const *argv[]) {
+  MySharePtr<int> sptr = new int(2);
+  cout<<"val: "<<*sptr<<endl;
+  cout<<"use count: "<<sptr.getcount()<<endl;
+  MySharePtr<int> sptr2 = sptr; // copy constructor
+  cout<<"use count: "<<sptr2.getcount()<<endl;
+  MySharePtr<int> sptr3;
+  sptr3 = sptr; // assignment
+  cout<<"use count: "<<sptr3.getcount()<<endl;
+  return 0;
 }
